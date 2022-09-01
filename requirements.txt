@@ -1,0 +1,16 @@
+asgiref
+certifi
+charset-normalizer
+dj-database-url
+Django
+djangorestframework
+gunicorn
+idna
+Pillow
+psycopg2-binary
+pytz
+requests
+sqlparse
+tzdata
+urllib3
+whitenoise
