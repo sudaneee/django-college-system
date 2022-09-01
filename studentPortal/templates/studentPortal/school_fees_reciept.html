@@ -1,0 +1,64 @@
+{% extends 'website/base.html' %}
+{% load static %}
+{% block content %}
+<div class="page-wrapper">
+
+
+
+    <!-- Main Header-->
+    {% include 'studentPortal/header.html'%}
+
+            <!--Billing Details-->
+            <div class="container mt-5">
+
+                <div class="billing-details">
+                    <div class="shop-form">
+                        <form method="post" action="https://expert-themes.com/html/lezo/lezo/checkout.html">
+                            <div class="row clearfix">
+                                
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="sec-title"><h2>Payment Details</h2></div>
+                                    <div class="shop-order-box">
+                                        <ul class="order-list">
+                                            <li>Description<span>TOTAL</span></li>
+                                            <li>Laboratory Fees<span>N25,000.00</span></li>
+                                            <li>ID Card Fees<span>N1,500.00</span></li>
+                                            <li>Library Fees<span>N10,000.00</span></li>
+                                            <li>Spot Fees<span>N3,000.00</span></li>
+                                            <li>Medical Fees<span>N5,000.00</span></li>
+                                            <li>Subtotal<span class="dark">N44,500.00</span></li>
+                                            <li class="total">TOTAL<span class="dark">N44,500.00</span></li>
+                                        </ul>
+                                        
+                                        
+                                        <!--Place Order-->
+                                        <div class="place-order">
+                                           
+                                            <button type="button" class="theme-btn btn-style-one">Print</button>
+                                            
+                                        </div>
+                                        <!--End Place Order-->
+                                        
+                                    </div>
+                                    
+                                    
+                                </div>
+                            </div>                             
+                        </form>
+                        
+                    </div>
+                    
+                </div><!--End Billing Details-->
+
+            </div>
+
+
+</div>
+<footer style="position: fixed; bottom: 0; width: 100%;">
+    <div class="container" style="background-color: #3D9970;">
+        <p class="text-center" style="color: #fff;">Developed by -- Musaddiq Technologies Ltd @+2347060936935</p>
+    </div>
+</footer>
+<!--End pagewrapper-->
+
+{%endblock content%}

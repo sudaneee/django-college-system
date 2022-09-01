@@ -1,0 +1,51 @@
+{% extends 'website/base.html' %}
+{% load static %}
+{% block content %}
+<div class="page-wrapper">
+
+
+
+    <!-- Main Header-->
+    {% include 'staffPortal/header.html'%}
+
+    <!--DashBoard Section-->
+    <section class="team-section">
+        <div class="auto-container">
+
+            <div class="row clearfix">
+
+                {% for staff in staffs%}
+                <!--Team Member-->
+ 
+                <div class="team-member col-lg-4 col-md-6 col-sm-12">
+                    <div class="inner-box wow fadeIn" data-wow-delay="0ms" data-wow-duration="1500ms">
+                        <div class="image-box">
+                            <figure class="image"><img src="{{staff.image.url}}" alt=""></figure>
+                        </div>
+                        <div class="lower-content">
+                            <h6 class="text-left p-2"><a href="#">Name: Abbas Ismail Muhammad</a></h6>
+                            <div class="designation text-left p-2">Designation: Exam Officer</div>
+                            <div class="designation text-left p-2">Email: ismailabbas355@gmail.com</div>
+                            <div class="designation text-left p-2">Phone No: 07060936935</div>
+                            <h6 class="text-left p-2"><a href="{% url 'logout' %}">Logout</a></h6>
+                        </div>
+                    </div>
+                </div>
+
+                {% endfor %}
+
+
+            </div>
+
+        </div>
+    </section>
+    <!--End Team Section-->
+</div>
+<footer style="position: fixed; bottom: 0; width: 100%;">
+    <div class="container" style="background-color: #3D9970;">
+        <p class="text-center" style="color: #fff;">Developed by -- Musaddiq Technologies Ltd @+2347060936935</p>
+    </div>
+</footer>
+<!--End pagewrapper-->
+
+{%endblock content%}
