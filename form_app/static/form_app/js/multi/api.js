@@ -73,7 +73,7 @@ function testy() {
     let xhr = new XMLHttpRequest();
 
     var authorizationBasic = window.btoa('sudaniy' + ':' + 'ismailk2@');
-    xhr.open("POST", "http://127.0.0.1:8000/api/api-createApplication");
+    xhr.open("POST", "http://nihaz.org.ng/api/api-createApplication");
     xhr.setRequestHeader("Accept", "application/json");
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.setRequestHeader('Authorization', 'Basic ' + authorizationBasic);

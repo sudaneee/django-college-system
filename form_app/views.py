@@ -4,6 +4,7 @@ import requests
 import json
 from .models import ApplicationForm
 from django.contrib import messages
+from django.urls import reverse
 
 
 
@@ -16,14 +17,14 @@ def form_home(request):
 
         if not query:
 
-
+            call_back_url = reverse('form-home')
             header = {'Authorization': 'Bearer sk_live_d1ef85e474c6068c3bebf0d69f44c569ece66fb9'}
             url = 'https://api.paystack.co/transaction/initialize'
             data = {
                 'email': email,
-                'amount': 500*100,
+                'amount': 4500*100,
                 'currency': 'NGN',
-                'callback_url': 'http://127.0.0.1:8000/form/apply'
+                'callback_url': call_back_url
             }
 
             resp = requests.post(url=url, headers=header, json=data)
