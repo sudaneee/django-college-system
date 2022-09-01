@@ -1,0 +1,145 @@
+{% extends 'website/base.html' %}
+{% load static %}
+{% block content %}
+<div class="page-wrapper">
+
+
+
+    <!-- Main Header-->
+    {% include 'staffPortal/header.html'%}
+
+            <!--Billing Details-->
+            <div class="container mt-5">
+
+                <div class="billing-details">
+                    <div class="shop-form">
+
+                            <div class="row clearfix">
+
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <form method="POST" >
+                                        {% csrf_token %}
+                                        <div class="sec-title"><h2>Upload Student Result</h2></div>
+                                        <div class="billing-inner">
+                                            <div class="row clearfix">
+                                                
+
+                                                
+                                                <!--Form Group-->
+                                                <div class="form-group col-md-4 col-sm-12 col-xs-12">
+                                                    <div class="field-label">Session <sup>*</sup> </div>
+                                                    <select name="country">
+                                                        <option>Select an option</option>
+                                                        <option>2022/2023</option>
+                                                        <option>2023/2024</option>
+                                                        <option>2024/2025</option>
+                                                    </select>
+                                                </div>
+                                                <!--Form Group-->
+                                                <div class="form-group col-md-4 col-sm-12 col-xs-12">
+                                                    <div class="field-label">Semester <sup>*</sup> </div>
+                                                    <select name="country">
+                                                        <option>Select an option</option>
+                                                        <option>First Semester</option>
+                                                        <option>Second Semester</option>
+
+                                                    </select>
+                                                </div>
+                                                <!--Form Group-->
+                                                <div class="form-group col-md-4 col-sm-12 col-xs-12">
+                                                    <div class="field-label">Course <sup>*</sup> </div>
+                                                    <select name="country">
+                                                        <option>Select an option</option>
+                                                        <option>COSC101</option>
+                                                        <option>COSC204</option>
+                                                        <option>COSC305</option>
+
+                                                    </select>
+                                                </div>
+
+
+
+                                                <!--Form Group-->
+                                                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                                    <button name="upload" type="submit" class="theme-btn btn-style-one">Get</button>
+                                                </div>
+
+                                                
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <form method="POST" >
+                                        {% csrf_token %}
+                                        <div class="sec-title"><h2>Update Student Result</h2></div>
+                                        <div class="billing-inner">
+                                            <div class="row clearfix">
+                                                
+
+                                                
+                                                <!--Form Group-->
+                                                <div class="form-group col-md-4 col-sm-12 col-xs-12">
+                                                    <div class="field-label">Session <sup>*</sup> </div>
+                                                    <select name="country">
+                                                        <option>Select an option</option>
+                                                        <option>2022/2023</option>
+                                                        <option>2023/2024</option>
+                                                        <option>2024/2025</option>
+                                                    </select>
+                                                </div>
+                                                <!--Form Group-->
+                                                <div class="form-group col-md-4 col-sm-12 col-xs-12">
+                                                    <div class="field-label">Semester <sup>*</sup> </div>
+                                                    <select name="country">
+                                                        <option>Select an option</option>
+                                                        <option>First Semester</option>
+                                                        <option>Second Semester</option>
+
+                                                    </select>
+                                                </div>
+                                                <!--Form Group-->
+                                                <div class="form-group col-md-4 col-sm-12 col-xs-12">
+                                                    <div class="field-label">Course <sup>*</sup> </div>
+                                                    <select name="country">
+                                                        <option>Select an option</option>
+                                                        <option>COSC101</option>
+                                                        <option>COSC204</option>
+                                                        <option>COSC305</option>
+
+                                                    </select>
+                                                </div>
+
+
+
+                                                <!--Form Group-->
+                                                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                                    <button name="update" type="submit" class="theme-btn btn-style-one">View</button>
+                                                </div>
+
+                                                
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+
+
+                                
+
+                            </div>                             
+                        
+                        
+                    </div>
+                    
+                </div><!--End Billing Details-->
+            </div>
+</div>
+<footer style="position: fixed; bottom: 0; width: 100%;">
+    <div class="container" style="background-color: #3D9970;">
+        <p class="text-center" style="color: #fff;">Developed by -- Musaddiq Technologies Ltd @+2347060936935</p>
+    </div>
+</footer>
+<!--End pagewrapper-->
+
+{%endblock content%}
