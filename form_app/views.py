@@ -91,6 +91,5 @@ def application_form(request):
             return render(request, 'form_app/application_form.html')
 
         
-        
 
     return render(request, 'form_app/application_form.html')
