@@ -1,0 +1,457 @@
+{% extends 'form_app/partials/base.html' %}
+{% load static %}
+
+
+{% block content %}
+    {% include 'form_app/partials/navbar.html' %}
+    {% include 'form_app/partials/sidebar.html' %}
+    <div class="main-content" id='app'>
+      <section class="section">
+        <div class="section-body">
+          {% if messages %}
+          {% for message in messages %}
+          <div class="alert alert-success alert-dismissible show fade mt-2">
+            <div class="alert-body">
+              <button class="close" data-dismiss="alert">
+                <span>&times;</span>
+              </button>
+              {{message}}
+            </div>
+          </div>
+          {% endfor%}
+          {% endif %}
+
+          <div class='row'>
+            {% comment %} ==========Bio Data============= {% endcomment %}
+
+            <div class="col-12 col-md-12 col-lg-12">
+              <form method="POST">
+                {% csrf_token %}
+              <div class='card'>
+                <div class="card-header">
+                  <h4>Add O Level Result</h4>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 col-sm-12">
+                    <div class='card-body'>
+                    
+                      <div class="row">
+                        <div class="form-group col-md-12 col-sm-12">
+                          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" checked  disabled>
+                          <label class="form-check-label" for="inlineCheckbox1">First Sitting</label>
+                        </div>
+
+                        <div class="form-group col-md-6 col-sm-12" >
+                          <label>Exam Type</label>
+                          <select class="form-control select" name="exam_type">
+                            <option>West African Examination Council</option>
+                            <option>National Examination Council</option>
+                          </select>
+                        </div>
+                        <div class="form-group col-md-6 col-sm-12">
+                          <label>Exam Year</label>
+                          <select class="form-control select" name="exam_year">
+                            <option>2024</option>
+                            <option>2023</option>
+                          </select>
+                        </div>
+                        
+                        <div class="form-group col-md-6 col-sm-12">
+                          <label>Exam Number</label>
+                          <input type="text" name="exam_number" class="form-control">
+                        </div>
+
+                        <div class="form-group col-md-6 col-sm-12">
+                          <label>Center Number</label>
+                          <input type="text" name="center_number" class="form-control">
+                        </div>
+
+                        
+                        <div class="form-group col-md-12 col-sm-12">
+                          <label>Center Name</label>
+                          <input type="text" name="center_name" class="form-control">
+                        </div>
+
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">Subject</th>
+                              <th scope="col">Grade</th>
+
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th scope="row">1</th>
+                              <td>
+                                <select class="form-control select" name="subject">
+                                  <option>English Language</option>
+                                  <option>Mathematics</option>
+                                </select>
+                              </td>
+                              <td>
+                                <select class="form-control select" name="grade">
+                                  <option>A1</option>
+                                  <option>B2</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">2</th>
+                              <td>
+                                <select class="form-control select" name="subject">
+                                  <option>English Language</option>
+                                  <option>Mathematics</option>
+                                </select>
+                              </td>
+                              <td>
+                                <select class="form-control select" name="grade">
+                                  <option>A1</option>
+                                  <option>B2</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">3</th>
+                              <td>
+                                <select class="form-control select" name="subject">
+                                  <option>English Language</option>
+                                  <option>Mathematics</option>
+                                </select>
+                              </td>
+                              <td>
+                                <select class="form-control select" name="grade">
+                                  <option>A1</option>
+                                  <option>B2</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">4</th>
+                              <td>
+                                <select class="form-control select" name="subject">
+                                  <option>English Language</option>
+                                  <option>Mathematics</option>
+                                </select>
+                              </td>
+                              <td>
+                                <select class="form-control select" name="grade">
+                                  <option>A1</option>
+                                  <option>B2</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">5</th>
+                              <td>
+                                <select class="form-control select" name="subject">
+                                  <option>English Language</option>
+                                  <option>Mathematics</option>
+                                </select>
+                              </td>
+                              <td>
+                                <select class="form-control select" name="grade">
+                                  <option>A1</option>
+                                  <option>B2</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">6</th>
+                              <td>
+                                <select class="form-control select" name="subject">
+                                  <option>English Language</option>
+                                  <option>Mathematics</option>
+                                </select>
+                              </td>
+                              <td>
+                                <select class="form-control select" name="grade">
+                                  <option>A1</option>
+                                  <option>B2</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">7</th>
+                              <td>
+                                <select class="form-control select" name="subject">
+                                  <option>English Language</option>
+                                  <option>Mathematics</option>
+                                </select>
+                              </td>
+                              <td>
+                                <select class="form-control select" name="grade">
+                                  <option>A1</option>
+                                  <option>B2</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">8</th>
+                              <td>
+                                <select class="form-control select" name="subject">
+                                  <option>English Language</option>
+                                  <option>Mathematics</option>
+                                </select>
+                              </td>
+                              <td>
+                                <select class="form-control select" name="grade">
+                                  <option>A1</option>
+                                  <option>B2</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">9</th>
+                              <td>
+                                <select class="form-control select" name="subject">
+                                  <option>English Language</option>
+                                  <option>Mathematics</option>
+                                </select>
+                              </td>
+                              <td>
+                                <select class="form-control select" name="grade">
+                                  <option>A1</option>
+                                  <option>B2</option>
+                                </select>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>                          
+  
+                      </div>
+                      
+                      
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-12">
+                    <div class='card-body'>
+         
+                      <div class="row">
+                        <div class="form-group col-md-12 col-sm-12">
+                          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option1">
+                          <label class="form-check-label" for="inlineCheckbox2">Second Sitting</label>
+                        </div>
+                        
+                        <div class="row" id="div1">
+                        <div class="form-group col-md-6 col-sm-12" >
+                          <label>Exam Type</label>
+                          <select class="form-control select" name="exam_type" disabled>
+                            <option>West African Examination Council</option>
+                            <option>National Examination Council</option>
+                          </select>
+                        </div>
+                        <div class="form-group col-md-6 col-sm-12">
+                          <label>Exam Year</label>
+                          <select class="form-control select" name="exam_year" disabled>
+                            <option>2024</option>
+                            <option>2023</option>
+                          </select>
+                        </div>
+                        
+                        <div class="form-group col-md-6 col-sm-12" id="div1">
+                          <label>Exam Number</label>
+                          <input type="text" name="exam_number" class="form-control" disabled>
+                        </div>
+
+                        <div class="form-group col-md-6 col-sm-12">
+                          <label>Center Number</label>
+                          <input type="text" name="center_number" class="form-control" disabled>
+                        </div>
+
+                        
+                        <div class="form-group col-md-12 col-sm-12">
+                          <label>Center Name</label>
+                          <input type="text" name="center_name" class="form-control" disabled>
+                        </div>
+
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">Subject</th>
+                              <th scope="col">Grade</th>
+
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th scope="row">1</th>
+                              <td>
+                                <select class="form-control select" name="subject" disabled>
+                                  <option>English Language</option>
+                                  <option>Mathematics</option>
+                                </select>
+                              </td>
+                              <td>
+                                <select class="form-control select" name="grade" disabled>
+                                  <option>A1</option>
+                                  <option>B2</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">2</th>
+                              <td>
+                                <select class="form-control select" name="subject" disabled>
+                                  <option>English Language</option>
+                                  <option>Mathematics</option>
+                                </select>
+                              </td>
+                              <td>
+                                <select class="form-control select" name="grade" disabled>
+                                  <option>A1</option>
+                                  <option>B2</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">3</th>
+                              <td>
+                                <select class="form-control select" name="subject" disabled>
+                                  <option>English Language</option>
+                                  <option>Mathematics</option>
+                                </select>
+                              </td>
+                              <td>
+                                <select class="form-control select" name="grade" disabled>
+                                  <option>A1</option>
+                                  <option>B2</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">4</th>
+                              <td>
+                                <select class="form-control select" name="subject" disabled>
+                                  <option>English Language</option>
+                                  <option>Mathematics</option>
+                                </select>
+                              </td>
+                              <td>
+                                <select class="form-control select" name="grade" disabled>
+                                  <option>A1</option>
+                                  <option>B2</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">5</th>
+                              <td>
+                                <select class="form-control select" name="subject" disabled>
+                                  <option>English Language</option>
+                                  <option>Mathematics</option>
+                                </select>
+                              </td>
+                              <td>
+                                <select class="form-control select" name="grade" disabled>
+                                  <option>A1</option>
+                                  <option>B2</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">6</th>
+                              <td>
+                                <select class="form-control select" name="subject" disabled>
+                                  <option>English Language</option>
+                                  <option>Mathematics</option>
+                                </select>
+                              </td>
+                              <td>
+                                <select class="form-control select" name="grade" disabled>
+                                  <option>A1</option>
+                                  <option>B2</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">7</th>
+                              <td>
+                                <select class="form-control select" name="subject" disabled>
+                                  <option>English Language</option>
+                                  <option>Mathematics</option>
+                                </select>
+                              </td>
+                              <td>
+                                <select class="form-control select" name="grade" disabled>
+                                  <option>A1</option>
+                                  <option>B2</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">8</th>
+                              <td>
+                                <select class="form-control select" name="subject" disabled>
+                                  <option>English Language</option>
+                                  <option>Mathematics</option>
+                                </select>
+                              </td>
+                              <td>
+                                <select class="form-control select" name="grade" disabled>
+                                  <option>A1</option>
+                                  <option>B2</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">9</th>
+                              <td>
+                                <select class="form-control select" name="subject" disabled>
+                                  <option>English Language</option>
+                                  <option>Mathematics</option>
+                                </select>
+                              </td>
+                              <td>
+                                <select class="form-control select" name="grade" disabled>
+                                  <option>A1</option>
+                                  <option>B2</option>
+                                </select>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>                          
+                        </div>
+                      </div>
+
+                      
+                    </div>
+                  </div>
+                  
+                </div>
+                
+              </div>
+              <button name="save_biodata" class="btn btn-primary" type="submit">Save</button>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </div>
+
+    {% include 'form_app/partials/footer.html' %}
+
+
+    <script>
+      const secondSittingCheckbox = document.getElementById('inlineCheckbox2');
+      const secondSittingInputs = document.querySelectorAll('#div1 input, #div1 select');
+
+      secondSittingCheckbox.addEventListener('change', function() {
+          const isChecked = secondSittingCheckbox.checked;
+          secondSittingInputs.forEach(input => {
+              input.disabled = !isChecked;
+          });
+      });
+
+      // Enable inputs if checkbox is initially checked
+      if (secondSittingCheckbox.checked) {
+          secondSittingInputs.forEach(input => {
+              input.disabled = false;
+          });
+      }
+    </script>
+{% endblock content %}
+

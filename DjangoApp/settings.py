@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-2jxq0zkj&o#i+r8&ga0fpqam9sydfw&r-i_$ody4fq45_##0@+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['109.237.26.4', '127.0.0.1', 'nihaz.org.ng']
+ALLOWED_HOSTS = ['109.237.26.4', '127.0.0.1', 'nihaz.org.ng', '192.168.43.69']
 
 
 # Application definition
@@ -39,12 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'apis',
     'website',
     'form_app',
-    'studentPortal',
-    'staffPortal',
     'djmoney',
+    'core',
+    'exams',
+    'student',
+    'django.core.paginator',
+
 
 ]
 

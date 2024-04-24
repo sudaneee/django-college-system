@@ -1,0 +1,127 @@
+{% extends 'form_app/partials/base.html' %}
+{% load static %}
+
+
+{% block content %}
+    {% include 'form_app/partials/navbar.html' %}
+    {% include 'form_app/partials/sidebar.html' %}
+    <div class="main-content" id='app'>
+      <section class="section">
+        <div class="section-body">
+          {% if messages %}
+          {% for message in messages %}
+          <div class="alert alert-success alert-dismissible show fade mt-2">
+            <div class="alert-body">
+              <button class="close" data-dismiss="alert">
+                <span>&times;</span>
+              </button>
+              {{message}}
+            </div>
+          </div>
+          {% endfor%}
+          {% endif %}
+          <div class='row'>
+            {% comment %} ==========Bio Data============= {% endcomment %}
+            <div class="col-12 col-md-12 col-lg-12">
+              <div class='card'>
+                <div class="card-header">
+                  <h4>Biodata Information</h4>
+                </div>
+                <div class='card-body'>
+                  <form method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                      <div class="form-group col-md-4 col-sm-12">
+                        <label>Surname</label>
+                        <input type="text" name="surname" class="form-control" value="{{biodataObject.surname}}" {% if biodataObject %} disabled {% endif %}>
+                      </div>
+                      <div class="form-group col-md-4 col-sm-12">
+                        <label>Firstname</label>
+                        <input type="text" name="firstname" class="form-control" value="{{biodataObject.firstname}}" {% if biodataObject %} disabled {% endif %}>
+                      </div>
+                      <div class="form-group col-md-4 col-sm-12">
+                        <label>Othername</label>
+                        <input type="text" name="othername" class="form-control" value="{{biodataObject.othername}}" {% if biodataObject %} disabled {% endif %}>
+                      </div>
+
+                      <div class="form-group col-md-4 col-sm-12">
+                        <label>Marital Status</label>
+                        <select class="form-control select" name="marital_status">
+                          <option>{{biodataObject.marital_status}}</option>
+                          <option>Single</option>
+                          <option>Married</option>
+                          <option>Divorced</option>
+                          <option>Widow</option>
+                          <option>Seperated</option>
+                          </select>
+                      </div>
+
+                      <div class="form-group col-md-4 col-sm-12">
+                        <label>Gender</label>
+                        <select class="form-control select" name="gender">
+                          <option>{{biodataObject.gender}}</option>
+                          <option>Male</option>
+                          <option>Female</option>
+                          </select>
+                      </div>
+
+                      <div class="form-group col-md-4 col-sm-12">
+                        <label>Date of Birth</label>
+                        <input type="date" class="form-control" name="date_of_birth" value="{{biodataObject.date_of_birth}}">
+                      </div>
+
+                      <div class="form-group col-md-4 col-sm-12">
+                        <label>Nationality</label>
+                        <select class="form-control select" name="nationality">
+                          <option>{{biodataObject.nationality}}</option>
+                          <option>Nigerian</option>
+                          <option>Ghanian</option>
+                        </select>
+                      </div>
+
+                      <div class="form-group col-md-4 col-sm-12">
+                        <label>Place of Birth</label>
+                        <input type="text" name="place_of_birth" class="form-control" value="{{biodataObject.place_of_birth}}">
+                      </div>
+
+                      <div class="form-group col-md-4 col-sm-12">
+                        <label>Home Town</label>
+                        <input type="text" name="home_town" class="form-control" value="{{biodataObject.home_town}}">
+                      </div>
+
+                      <div class="form-group col-md-4 col-sm-12">
+                        <label>State of Origin</label>
+                        <select class="form-control select" name="state_of_origin">
+                          <option>{{biodataObject.state_of_origin}}</option>
+                          <option>Kaudna</option>
+                          <option>Kano</option>
+                        </select>
+                      </div>
+
+                      <div class="form-group col-md-8 col-sm-12">
+                        <label>LGA of Origin</label>
+                        <select class="form-control select" name="lga_of_origin">
+                          <option>{{biodataObject.lga_of_origin}}</option>
+                          <option>Zaria</option>
+                          <option>Sabon-Gari</option>
+                        </select>
+                      </div>
+
+
+                    </div>
+                    <button name="save_biodata" class="btn btn-primary mr-1" type="submit">Save</button>
+                  </form>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    {% include 'form_app/partials/footer.html' %}
+
+
+{% endblock content %}
+

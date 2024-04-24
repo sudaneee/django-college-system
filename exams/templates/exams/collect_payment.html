@@ -1,0 +1,86 @@
+{% extends 'src/partials/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'src/partials/navbar.html' %}
+{% include 'src/partials/sidebar.html' %}
+<div class="main-content" id="app3">
+  <section class="section">
+    <div class="section-body">
+        <div class="section-title text-center">
+            <h1>Payment Collection</h1>
+            <p>Enter the Order Reference below</p>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group mb-3">
+              <input type="text" v-model="orderRef" class="form-control" placeholder="" aria-label="">
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="button" @click="amountGet">Submit</button>
+              </div>
+            </div>
+        </div>
+        <p id="cToken" style="visibility: hidden;">{{ csrf_token }}</p>
+
+
+        <div v-if="total > 0" class="section-title text-center">
+          <h4>Total Amount: [[formatterN.format(total)]]</h4>
+
+          <a :href="rUrl">Confirm Payment</a>
+        </div>
+
+
+    </div>
+  </section>
+</div>
+
+{% include 'src/partials/footer.html' %}
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js" integrity="sha512-QTnb9BQkG4fBYIt9JGvYmxPpd6TBeKp6lsUrtiVQsrJ9sb33Bn9s0wMQO9qVBFbPX3xHRAsBHvXlcsrnJjExjg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    let vm = Vue.createApp({
+      delimiters: ["[[", "]]"],
+      data(){
+          return {
+              sales: [],
+              total: 0,
+              orderRef: '',
+              rUrl: '',
+              productOperation: 'Product',
+              formatterN: Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'NGN',
+
+              })
+          }
+      },
+      methods: {
+        async amountGet(event){
+            cToken = document.getElementById('cToken').innerHTML
+            await axios.get(`${window.location.origin}/api-sale-view/${this.orderRef}`, { }, {
+                auth: {
+                  username: 'sudaniy',
+                  password: 'ismailk2@'
+                },
+                headers: {"X-CSRFToken": cToken}
+              }).then(response => (this.sales = response.data ))
+
+            amount = this.sales.map(item => {
+              return item.price * item.quantity
+
+            })
+
+            this.total = amount.reduce((a, b) => a + b)
+            this.rUrl = "{% url 'confirm-payment' orderRef=0 %}".replace('0', this.orderRef)
+
+
+        }
+      }
+  }).mount('#app3')
+
+
+
+  </script>
+
+
+{% endblock content %}
+

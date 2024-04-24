@@ -1,0 +1,52 @@
+{% extends 'src/partials/base.html' %}
+{% load static %}
+
+
+{% block content %}
+    {% include 'src/partials/navbar.html' %}
+    {% include 'src/partials/sidebar.html' %}
+    <div class="main-content">
+      <section class="section">
+        <div class="section-body">
+          <div class='row'>
+            {% comment %} ==========Products============= {% endcomment %}
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Order Records</h4>
+                  {% if request.user.is_superuser %}
+                  <h4>Total: {{totalAmount}}</h4>
+                  <h4>Profit: {{totalProfit}}</h4>
+                  {%endif%}
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-striped table-hover" id="save-stage" style="width:100%;">
+                      <thead>
+                        <tr>
+                          <th>Order Reference</th>
+                          <th>Amount</th>
+                          <th>Order Date</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for order, amount in orders %}
+                        <tr>
+                          <td><a href="{% url 'order_details' order.id %}">{{order.orderReference}}</a></td>
+                          <td>{{amount}}</td>
+                          <td>{{order.orderedOn|date:"F, d, Y, G:i"}}</td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    {% include 'src/partials/footer.html' %}
+{% endblock content %}

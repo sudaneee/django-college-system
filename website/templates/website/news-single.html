@@ -48,6 +48,9 @@
                                 	<p>{{news_single.content}}</p>
                             
                                 </div>
+                                {% if news_single.news_file %}
+                                    <a  class="theme-btn btn-style-one" href="{{news_single.news_file.url}}" target="_blank">View pdf</a>
+                                {% endif %}
                                 <!--post-share-options-->
                                 <div class="post-share-options clearfix">
                                     <div class="pull-left">

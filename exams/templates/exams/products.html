@@ -1,0 +1,72 @@
+{% extends 'src/partials/base.html' %}
+{% load static %}
+
+
+{% block content %}
+    {% include 'src/partials/navbar.html' %}
+    {% include 'src/partials/sidebar.html' %}
+    <div class="main-content">
+      <section class="section">
+        <div class="section-body">
+          {% if messages %}
+          {% for message in messages %}
+          <div class="alert alert-success alert-dismissible show fade">
+            <div class="alert-body">
+              <button class="close" data-dismiss="alert">
+                <span>&times;</span>
+              </button>
+              {{message}}
+            </div>
+          </div>
+          {% endfor%}
+          {% endif %}
+          <div class='row'>
+            {% comment %} ==========Products============= {% endcomment %}
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4>List of Products</h4>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-striped table-hover" id="save-stage" style="width:100%;">
+                      <thead>
+                        <tr>
+                          <th>Product Name</th>
+                          <th>Product Description</th>
+                          <th>Quantity Type</th>
+                          <th>Purchased Price</th>
+                          <th>Price</th>
+                          <th>Quantity In Stock</th>
+                          <th>Quantity In Stock Available</th>
+                          <th>Stocked On</th>
+                          <th>Expiry Date</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for product in products %}
+                        <tr>
+                          <td><a href="{% url 'product' product.id %}">{{product.name}}</a></td>
+                          <td>{{product.description}}</td>
+                          <td>{{product.quantityType}}</td>
+                          <td>{{product.purchasedPrice}}</td>
+                          <td>{{product.price}}</td>
+                          <td>{{product.quantityInStock}}</td>
+                          <td>{{product.quantityInStockAvailable}}</td>
+                          <td>{{product.stockedOn}}</td>
+                          <td>{{product.expiryDate}}</td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    {% include 'src/partials/footer.html' %}
+{% endblock content %}

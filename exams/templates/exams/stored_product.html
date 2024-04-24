@@ -1,0 +1,80 @@
+{% extends 'src/partials/base.html' %}
+{% load static %}
+
+
+{% block content %}
+    {% include 'src/partials/navbar.html' %}
+    {% include 'src/partials/sidebar.html' %}
+    <div class="main-content">
+      <section class="section">
+        <div class="section-body">
+          <div class='row'>
+            {% comment %} ==========Product============= {% endcomment %}
+            <div class="col-12 col-md-12 col-lg-12">
+              <div class='card'>
+                <div class="card-header">
+                  <h4>Store Product</h4>
+                </div>
+                <div class='card-body'>
+                  <form method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                      <div class="form-group col-6">
+                        <label>Product</label>
+                        <select class="form-control select2" name="product">
+                          <option>Select Product</option>
+                          {% for product in products %}
+                            <option value="{{product.id}}">{{product.genericName}} == {{product.brandName}} == {{product.otherName}}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                      <div class="form-group col-6">
+                        <label>Quantity Type</label>
+                        <select class="form-control select2" name="quantity_type">
+                          <option>Select Quantity Type</option>
+                          <option>Tablet/Capsule/Bottle</option>
+                          <option>Box</option>
+                          <option>Packet</option>
+                          <option>Sachet</option>
+                          </select>
+                      </div>
+                      <div class="form-group col-6">
+                        <label>Purchased Price(N)</label>
+                        <input type="text" name="purchased_price" class="form-control">
+                      </div>
+                      <div class="form-group col-6">
+                        <label>Quantity</label>
+                        <input type="number" name="quantity" class="form-control">
+                      </div>
+
+                      <div class="form-group col-12">
+                        <label>Expiry Date</label>
+                        <input type="text" name="expiry_date" class="form-control" placeholder="24-10-2023">
+                      </div>
+                    </div>
+                    <button name="store_product" class="btn btn-primary mr-1" type="submit">Submit</button>
+
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-success alert-dismissible show fade mt-2">
+                      <div class="alert-body">
+                        <button class="close" data-dismiss="alert">
+                          <span>&times;</span>
+                        </button>
+                        {{message}}
+                      </div>
+                    </div>
+                    {% endfor%}
+                    {% endif %}
+                  </form>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    {% include 'src/partials/footer.html' %}
+{% endblock content %}

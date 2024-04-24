@@ -1,0 +1,105 @@
+{% extends 'form_app/partials/base.html' %}
+{% load static %}
+
+
+{% block content %}
+    {% include 'form_app/partials/navbar.html' %}
+    {% include 'form_app/partials/sidebar.html' %}
+      <!-- Main Content -->
+      <div class="main-content">
+        <section class="section">
+          <div class="row ">
+         
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="card">
+                <div class="card-statistic-4">
+                  <div class="align-items-center justify-content-between">
+                    <div class="row">
+                      <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                        <div class="card-content">
+                          
+                          <h4 class="font-12 mb-3">Email: {{request.user.email}}</h4>
+                          <h4 class="font-12 mb-3">Course Applied: English/Hausa</h4>
+
+
+                          <h2 class="font-35">Entry Requirements:</h2>
+                          
+                          <p class="mb-0"><span class="col-green">
+                            <ol>
+                              {% for i in requirements %}
+                                <li>{{i}}</li>
+                              {% endfor %}
+                            </ol>
+                          </p>
+
+                        </div>
+                      </div>
+           
+                      <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                        <div class="card-content">
+
+                          <h2 class="font-20">Form Completion</h2>
+                          <table class="table table-sm" id="save-stage" style="width:100%;">
+
+                            <tbody>
+                              
+                              <tr>
+                                <td>1</td>
+                                <td>Biodata</td>
+                                <td>
+                                  <button type="button" class="btn btn-success btn-icon icon-left">
+                                     Notifications <i class="fas fa-check-circle"></i>
+                                  </button>
+                                </td>
+                              </tr>
+
+                              <tr>
+                                <td>2</td>
+                                <td>Contact</td>
+                                <td>
+                                  <button type="button" class="btn btn-success btn-icon icon-left">
+                                     Notifications <i class="fas fa-check-circle"></i>
+                                  </button>
+                                </td>
+                              </tr>
+
+                              <tr>
+                                <td>3</td>
+                                <td>O-Level</td>
+                                <td>
+                              
+                                      <button type="button" class="btn btn-success btn-icon icon-left">
+                                        Notifications <i class="fas fa-arrow-alt-circle-left"></i>
+                                    </button>
+                                  
+                                  
+                                </td>
+                              </tr>
+                          
+                            </tbody>
+                          </table>
+                          <p>please fill all empty records.</p>
+                          <form method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-light btn-icon icon-left">
+                              Pay Online <i class="fas fa-credit-card"></i>
+                            </button>
+                         </form>
+                        </div>
+                      </div>
+           
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+
+          </div>
+
+       
+        </section>
+
+      </div>
+    {% include 'form_app/partials/footer.html' %}
+{% endblock content %}

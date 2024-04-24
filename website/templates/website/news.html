@@ -34,47 +34,51 @@
             	
                 <!--Content Side-->
                 <div class="content-side col-lg-8 col-md-12 col-sm-12">
-                	<!--Blog List-->
-					<div class="blog-list">
-						
+                    <!--Blog List-->
+                    <div class="blog-list">
                         {% for news_item in news %}
-						<!--News Block Two-->
-						<div class="news-block-two">
-							<div class="inner-box">
-								<div class="row clearfix">
-									<!--Image Column-->
-									<div class="image-column col-lg-6 col-md-6 col-sm-12">
-										<div class="image">
-											<a href="{% url 'news-single' news_item.id%}"><img src="{{news_item.image.url}}" alt="" /></a>
-										</div>
-									</div>
-									<!--Content Column-->
-									<div class="content-column col-lg-6 col-md-6 col-sm-12">
-										<div class="inner-column">
-											<h6><a href="{% url 'news-single' news_item.id %}">{{news_item.title}}</a></h6>
-											<div class="text">{{news_item.content|slice:150}}...</div>
-											<ul class="post-date">
-												<li>{{news_item.posted}}</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+                        <!--News Block Two-->
+                        <div class="news-block-two">
+                            <div class="inner-box">
+                                <div class="row clearfix">
+                                    <!--Image Column-->
+                                    <div class="image-column col-lg-6 col-md-6 col-sm-12">
+                                        <div class="image">
+                                            <a href="{% url 'news-single' news_item.id %}"><img src="{{ news_item.image.url }}" alt="" /></a>
+                                        </div>
+                                    </div>
+                                    <!--Content Column-->
+                                    <div class="content-column col-lg-6 col-md-6 col-sm-12">
+                                        <div class="inner-column">
+                                            <h6><a href="{% url 'news-single' news_item.id %}">{{ news_item.title }}</a></h6>
+                                            <div class="text">{{ news_item.content|slice:150 }}...</div>
+                                            <ul class="post-date">
+                                                <li>{{ news_item.posted }}</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         {% endfor %}
 
-						
-						<!--Styled Pagination-->
-						<ul class="styled-pagination text-center">
-							<li class="prev"><a href="#"><span class="fa fa-angle-left"></span></a></li>
-							<li><a href="#" class="active">1</a></li>
-							<li><a href="#">2</a></li>
-							<li class="next"><a href="#"><span class="fa fa-angle-right"></span></a></li>
-						</ul>                
-						<!--End Styled Pagination-->
-						
-					</div>
-				</div>
+                        <!--Styled Pagination-->
+                        <ul class="styled-pagination text-center">
+                            {% if news.has_previous %}
+                            <li class="prev"><a href="?page=1"><span class="fa fa-angle-left"></span></a></li>
+                            {% endif %}
+                            {% for num in news.paginator.page_range %}
+                            <li {% if news.number == num %}class="active"{% endif %}><a href="?page={{ num }}">{{ num }}</a></li>
+                            {% endfor %}
+                            {% if news.has_next %}
+                            <li class="next"><a href="?page={{ news.paginator.num_pages }}"><span class="fa fa-angle-right"></span></a></li>
+                            {% endif %}
+                        </ul>
+                        <!--End Styled Pagination-->
+
+                    </div>
+                </div>
+
 				
 				<!--Sidebar Side-->
                 <div class="sidebar-side sticky-container col-lg-4 col-md-12 col-sm-12">

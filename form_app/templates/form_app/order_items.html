@@ -1,0 +1,91 @@
+{% extends 'src/partials/base.html' %}
+{% load static %}
+
+
+{% block content %}
+    {% include 'src/partials/navbar.html' %}
+    {% include 'src/partials/sidebar.html' %}
+    <div class="main-content" id='app'>
+      <section class="section">
+        <div class="section-body">
+          <div class='row'>
+
+            {% comment %} ==========Sales============= 
+            <div class="col-12 col-md-12 col-lg-12">
+              <div class='card'>
+                <div class="card-header">
+                  <h4>Filter Sales by Date Range</h4>
+                </div>
+                <div class='card-body'>
+                  <form method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="form-group">
+                          <label>From</label>
+                          <select class="form-control select2" name="item">
+                            <option>Select Product</option>
+                            {% for product in products %}
+                              <option value="{{product.id}}">{{product.productName}}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="form-group">
+                          <label>From</label>
+                          <input type="text" name="starting" class="form-control" placeholder="2020-01-27">
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="form-group">
+                          <label>To</label>
+                          <input type="text" name="ending" class="form-control" placeholder="2020-01-27">
+                        </div>
+                      </div>
+                    </div>
+
+                    <button name="orders_filter" class="btn btn-primary mr-1" type="submit">Submit</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+            {% endcomment %}
+            
+            <div class="col-12 col-md-12 col-lg-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Sold Products Record</h4>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-striped table-hover" id="save-stage" style="width:100%;">
+                      <thead>
+                        <tr>
+                          <th>Product</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for product in products %}
+                        <tr>
+                          <td><a href="{% url 'order-item-details' product.id %}">{{product}}</a></td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+  
+          </div>
+        </div>
+      </section>
+    </div>
+
+    {% include 'src/partials/footer.html' %}
+
+
+{% endblock content %}

@@ -24,7 +24,7 @@
                         <h1>{{carousel.title}}</h1>
                         <div class="text">{{carousel.content}}</div>
                         <div class="link-box">
-                            <a href="#" class="theme-btn btn-style-one">Learn More</a> <a href="{% url 'form-home'%}" class="theme-btn btn-style-two">Apply Now</a>
+                            <a href="#" class="theme-btn btn-style-one">Learn More</a> <a href="" class="theme-btn btn-style-two">Apply Now</a>
                         </div>
                     </div>
                 </div>
@@ -37,10 +37,10 @@
                 <div class="auto-container">
                     <div class="content centered clearfix">
                         <div class="title"></div>
-                        <h1>{{car5.title}}</h1>
-                        <div class="text">{{car5.content}}</div>
+                        {% comment %} <h1>{{car5.title}}</h1>
+                        <div class="text">{{car5.content}}</div> {% endcomment %}
                         <div class="link-box">
-                            <a href="#" class="theme-btn btn-style-one">Learn More</a> <a href="{% url 'form-home'%}" class="theme-btn btn-style-two">Apply Now</a>
+                            <a href="#" class="theme-btn btn-style-one">Learn More</a> <a href="" class="theme-btn btn-style-two">Apply Now</a>
                         </div>
                     </div>
                 </div>
@@ -59,10 +59,10 @@
                 <div class="column col-lg-7 col-md-12 col-sm-12">
                     <div class="about-content-box">
                         <div class="sec-title">
-                            <h2>About Nihaz</h2>
+                            <h2>About FCE Jama'are</h2>
                         </div>
     
-                        <div class="text">{{data.preamble}}</div>
+                        <div class="text-justify">{{data.preamble|slice:588}}</div>
 
                     </div>
                 </div>
@@ -74,6 +74,7 @@
                             <img src="{{about1.image.url}}" alt="" />
                         </figure>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -103,7 +104,7 @@
                                     <div class="icon-box">
                                         <span class="icon flaticon-graph"></span>
                                     </div>
-                                    <h3>Advanced <br> Analytics</h3>
+                                    <h3>Rich <br> Academics</h3>
                                 </div>
                             </div>
                         </div>
@@ -115,7 +116,7 @@
                                     <div class="icon-box">
                                         <span class="icon flaticon-time-1"></span>
                                     </div>
-                                    <h3>Corporate <br> Finance</h3>
+                                    <h3>Vibrant <br> Campus</h3>
                                 </div>
                             </div>
                         </div>
@@ -139,7 +140,7 @@
                                     <div class="icon-box">
                                         <span class="icon flaticon-analytics"></span>
                                     </div>
-                                    <h3>Our Workflow <br> & Process</h3>
+                                    <h3>Student <br> Support</h3>
                                 </div>
                             </div>
                         </div>
@@ -160,8 +161,8 @@
                     <div class="column counter-column col-lg-4 col-md-6 col-sm-12">
                         <div class="inner">
                             <div class="count-outer count-box">
-                                <span class="count-text" data-speed="2000" data-stop="200">0+</span>
-                                <h5 class="counter-title">Satisfied Students</h5>
+                                <span class="count-text" data-speed="2000" data-stop="500">0+</span>
+                                <h5 class="counter-title">Students</h5>
                             </div>
                         </div>
                     </div>
@@ -170,8 +171,8 @@
                     <div class="column counter-column col-lg-4 col-md-6 col-sm-12">
                         <div class="inner">
                             <div class="count-outer count-box">
-                                <span class="count-text" data-speed="3500" data-stop="5">0+</span>
-                                <h5 class="counter-title">Amazing Courses</h5>
+                                <span class="count-text" data-speed="3500" data-stop="30">0+</span>
+                                <h5 class="counter-title">Amazing Course Combinations</h5>
                             </div>
                         </div>
                     </div>
@@ -194,7 +195,7 @@
     </div>
     <!--End Fun Facts Section-->
 
-    <!--Case Section-->
+    {% comment %} <!--Case Section-->
     <section class="case-section">
         <div class="auto-container">
             <!--Sec Title-->
@@ -232,14 +233,14 @@
         </div>
 
     </section>
-    <!--End Case Section-->
+    <!--End Case Section--> {% endcomment %}
 
     <!--Team Section-->
     <section class="team-section">
         <div class="auto-container">
             <!--Sec Title-->
             <div class="sec-title centered">
-                <h2>Meet Our Staff</h2>
+                <h2>Meet Our Management Team</h2>
             </div>
 
             <div class="row clearfix">
@@ -258,7 +259,7 @@
                             </ul>
                         </div>
                         <div class="lower-content mt-1">
-                            <h6><a href="team-single.html">{{staff.name}}</a></h6>
+                            <h6><a href="{% url 'staff-single' staff.id %}">{{staff.name}}</a></h6>
                             <div class="designation">{{staff.designation}}</div>
                           
                         </div>
@@ -361,7 +362,7 @@
                                 Golifa Mona
                             </div> {% endcomment %}
                             <h5><a href="blog-single.html">{{blog.title}}</a></h5>
-                            <div class="text">{{blog.content}}</div>
+                            <div class="text-justify">{{blog.content}}</div>
                             <ul class="post-date">
                                 <li>{{blog.posted}}</li>
                             </ul> 

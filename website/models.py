@@ -65,6 +65,7 @@ class Blog(models.Model):
     content = models.TextField()
     image = models.ImageField(upload_to='pics')
     posted = models.DateTimeField(auto_now_add=True)
+    news_file = models.FileField(upload_to='website files', null=True)
 
 
     def __str__(self):
@@ -99,6 +100,7 @@ class Staff(models.Model):
     email = models.CharField(max_length=200)
 
     designation = models.TextField()
+    background = models.TextField(null=True, blank=True)
     image = models.ImageField(upload_to='pics')
     
 
@@ -108,7 +110,7 @@ class Staff(models.Model):
 
 class Gallery(models.Model):
     image = models.ImageField(upload_to='pics')
-    title = models.CharField(max_length=200, null=True)
+    title = models.CharField(max_length=200, null=True, blank=True)
 
     def __str__(self):
         return self.title

@@ -1,0 +1,86 @@
+{% extends 'exams/partials/base.html' %}
+{% load static %}
+
+
+{% block content %}
+    {% include 'exams/partials/navbar.html' %}
+    {% include 'exams/partials/sidebar.html' %}
+    <div class="main-content" id='app'>
+      <section class="section">
+        <div class="section-body">
+          {% if messages %}
+          {% for message in messages %}
+          <div class="alert {% if message.tags == 'success' %} alert-success {% else %} alert-danger {% endif %} alert-dismissible show fade mt-2">
+            <div class="alert-body">
+              <button class="close" data-dismiss="alert">
+                <span>&times;</span>
+              </button>
+              {{message}}
+            </div>
+          </div>
+          {% endfor%}
+          {% endif %}
+          <div class='row'>
+            {% comment %} ==========Bio Data============= {% endcomment %}
+            <div class="col-12 col-md-12 col-lg-12">
+              <div class='card'>
+                <div class="card-header">
+                  <h4>Update Result</h4>
+                </div>
+                <div class='card-body'>
+                  <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+
+                      <div class="form-group col-md-12 col-sm-12">
+                        <label>Session</label>
+                        <select class="form-control select" name="session">
+                          <option>select session</option>
+                          {% for i in sessions %}
+                            <option value="{{i.id}}">{{i.session_name}}</option>
+                          {% endfor %}
+                          </select>
+                      </div>
+
+                      <div class="form-group col-md-12 col-sm-12">
+                        <label>Semester</label>
+                        <select class="form-control select" name="semester">
+                          <option>select semester</option>
+                          {% for i in semesters %}
+                            <option value="{{i.id}}"> {{i.semester_name}}</option>
+                          {% endfor %}
+                          </select>
+                      </div>
+
+                      <div class="form-group col-md-12 col-sm-12">
+                        <label>Course</label>
+                        <select class="form-control select" name="course">
+                          <option>select course</option>
+                          {% for i in courses %}
+                            <option value="{{i.id}}">{{i.course_name}}</option>
+                          {% endfor %}
+                          </select>
+                      </div>
+
+                      <div class="form-group col-md-12 col-sm-12">
+                        <label>Select Excel File</label>
+                        <input type="file" name="file_upload" class="form-control">
+                      </div>
+
+                    </div>
+                    <button name="upload" class="btn btn-primary mr-1" type="submit">Upload</button>
+                  </form>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    {% include 'exams/partials/footer.html' %}
+
+
+{% endblock content %}
+

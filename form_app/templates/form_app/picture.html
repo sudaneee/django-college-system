@@ -1,0 +1,46 @@
+{% extends 'form_app/partials/base.html' %}
+{% load static %}
+
+
+{% block content %}
+    {% include 'form_app/partials/navbar.html' %}
+    {% include 'form_app/partials/sidebar.html' %}
+    <div class="main-content" id='app'>
+      <section class="section">
+        <div class="section-body">
+          <div class='row'>
+            {% comment %} ==========Picture============= {% endcomment %}
+            <div class="col-12 col-md-12 col-lg-12">
+              <div class='card'>
+                <div class="card-header">
+                  <h4>Picture</h4>
+                </div>
+                <div class='card-body'>
+                  <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                      <figure class="avatar mr-2 avatar-xl">
+                        <img src="{{pictureObject.image.url}}" alt="...">
+                      </figure>
+                      <div class="form-group col-md-12 col-sm-12">
+                        <label>Picture</label>
+                        <input type="file" name="image" class="form-control">
+                      </div>
+                      
+                    </div>
+                    <button name="save_biodata" class="btn btn-primary mr-1" type="submit">Upload</button>
+                  </form>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    {% include 'form_app/partials/footer.html' %}
+
+
+{% endblock content %}
+

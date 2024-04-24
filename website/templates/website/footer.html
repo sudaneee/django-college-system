@@ -14,7 +14,7 @@
                             <div class="logo">
                                 <a href="index-2.html"><img src="{{ data.footer_logo.url }}" alt="" style="width: 150px;" /></a>
                             </div>
-                            <div class="text">{{data.preamble|slice:150}}...</div>
+                            <div class="text">{{data.preamble|slice:350}}...</div>
                             <a href="#" class="theme-btn btn-style-two">Read More</a>
                         </div>
                     </div>
@@ -26,8 +26,8 @@
                             <h5>Usefull Links</h5>
                             <div class="row clearfix">
                                 <ul class="link-list col-md-12 col-sm-12 col-xs-12">
-                                    {% for course in courses%}
-                                    <li><a href="#">{{course.title}}</a></li>
+                                    {% for department in departments%}
+                                    <li><a href="{% url 'department' department.department_name %}">{{department.department_name}}</a></li>
                                     {%endfor%}
                                 </ul>
                             </div>
@@ -44,8 +44,8 @@
                             <div class="news-widget-block">
                                 <div class="inner">
                                     <div class="icon flaticon-world"></div>
-                                    <div class="post-date">February 14, 2019</div>
-                                    <div class="text"><a href="#">Seminar for improve  business profit & loss</a></div>
+                                    <div class="post-date">{{blog.posted}}</div>
+                                    <div class="text"><a href="{% url 'news-single' blog.id %}">{{blog.title}}</a></div>
                                 </div>
                             </div>
                             {%endfor%}

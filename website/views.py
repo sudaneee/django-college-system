@@ -8,60 +8,64 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout
+from core.models import Department, School, Unit
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from .models import Staff
 
 
 
-def loginPage(request):
+def is_staff(user):
+    if user.staff:
+        return True
+
     
-    page = 'login'
-    if request.user.is_authenticated:
-        if request.user.is_superuser:
-            return redirect(reverse('admin:index'))
-        elif request.user.is_staff:
-            return redirect(reverse('staff-dashboard'))
-        # return redirect('home')
-        else:
-            return redirect(reverse('student-dashboard'))
 
 
-    if request.method == 'POST':
-        username = request.POST.get('username').lower()
-        password = request.POST.get('password')
+# def loginPage(request):
+    
+#     page = 'login'
+#     if request.user.is_authenticated:
+#         if hasattr(request.user, 'staff'):
+#             return redirect(reverse('staff-dashboard'))
+#         elif hasattr(request.user, 'student'):
+#             return redirect(reverse('student-dashboard'))
+#         # return redirect('home')
+#         else:
+#             return redirect(reverse('admin:index'))
 
 
-        try:
-            user = User.objects.get(username=username)
+#     if request.method == 'POST':
+#         username = request.POST.get('username')
+#         password = request.POST.get('password')
+
+
+#         try:
+#             user = User.objects.get(username=username)
             
-        except:
-            messages.error(request, 'User does not exist')
+#         except:
+#             messages.error(request, 'User does not exist')
 
-        user = authenticate(request, username=username, password=password)
+#         user = authenticate(request, username=username, password=password)
 
 
-        if user is not None:
-            login(request, user)
-            if user.is_superuser:
-                return redirect(reverse('admin:index'))
+#         if user is not None:
+#             login(request, user)
+#             if hasattr(user, 'student'):
+#                 return redirect(reverse('student-dashboard'))
+#             elif hasattr(user, 'staff'):
+#                 return redirect(reverse('staff-dashboard'))
+                  
+#         messages.error(request, 'Username OR password does not exit')
+#         return redirect(reverse('login'))
 
-            elif user.is_staff:
-                return redirect(reverse('staff-dashboard'))
-            # return redirect('home')
-            else:
-                return redirect(reverse('student-dashboard'))
-            
-     
-
-        else:
-            messages.error(request, 'Username OR password does not exit')
-
-    context = {'page': page}
-    return render(request, 'website/login.html')
+#     context = {'page': page}
+#     return render(request, 'website/login.html')
 
 
 
-def logoutUser(request):
-    logout(request)
-    return redirect('login')
+# def logoutUser(request):
+#     logout(request)
+#     return redirect('login')
 
 
 
@@ -74,19 +78,42 @@ def home(request):
 def about(request):
     return render(request, 'website/about.html')
 
-def course(request, pk):
-    c = Course.objects.get(id=pk)
+def department(request, department_name):
+    c = Department.objects.get(department_name=department_name)
     context = {
-        'course': c,
+        'department': c,
     }
-    return render(request, 'website/course.html', context)
+    return render(request, 'website/department.html', context)
+
+def school(request, school_name):
+    c = School.objects.get(school_name=school_name)
+    context = {
+        'school': c,
+    }
+    return render(request, 'website/school.html', context)
+
+def unit(request, unit_name):
+    c = Unit.objects.get(unit_name=unit_name)
+    context = {
+        'unit': c,
+    }
+    return render(request, 'website/unit.html', context)
 
 
 def gallery(request):
 
     gallery_object = Gallery.objects.all()
+    paginator = Paginator(gallery_object, 9)
+
+    page = request.GET.get('page')
+    try:
+        images = paginator.page(page)
+    except PageNotAnInteger:
+        images = paginator.page(1)
+    except EmptyPage:
+        images = paginator.page(paginator.num_pages)
     context = {
-        'gallery_object': gallery_object,
+        'images': images,
     }
 
     return render(request, 'website/gallery.html', context)
@@ -103,9 +130,21 @@ def single_gallery(request, pk):
 
 
 def news(request):
-    c = Blog.objects.all()
+    news_list = Blog.objects.all()
+    paginator = Paginator(news_list, 3)  # Show 10 news items per page
+
+    page = request.GET.get('page')
+    try:
+        news = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        news = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        news = paginator.page(paginator.num_pages)
+
     context = {
-        'news': c
+        'news': news
     }
     return render(request, 'website/news.html', context)
 
@@ -118,6 +157,13 @@ def news_single(request, pk):
         'news': b
     }
     return render(request, 'website/news-single.html', context)
+
+def staff_single(request, pk):
+    c = Staff.objects.get(id=pk)
+    context = {
+        'staff_single': c,
+    }
+    return render(request, 'website/staff-single.html', context)
 
 
 def contact(request):

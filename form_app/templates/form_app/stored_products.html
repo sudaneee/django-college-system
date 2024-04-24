@@ -1,0 +1,56 @@
+{% extends 'src/partials/base.html' %}
+{% load static %}
+
+
+{% block content %}
+    {% include 'src/partials/navbar.html' %}
+    {% include 'src/partials/sidebar.html' %}
+    <div class="main-content">
+      <section class="section">
+        <div class="section-body">
+          <div class='row'>
+            {% comment %} ==========Products============= {% endcomment %}
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Stored Products</h4>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-striped table-hover" id="save-stage" style="width:100%;">
+                      <thead>
+                        <tr>
+                          <th>Product</th>
+                          <th>Quantity Type</th>
+                          <th>Quantity Stored</th>
+                          <th>Available Quantity</th>
+                          <th>Purchased Price</th>
+                          <th>Expiry Date</th>
+                          <th>Date Stored</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for item in stored_products %}
+                        <tr>
+                          <td><a href="{% url 'stored-product-details' item.id %}">{{item.product}}</a></td>
+                          <td>{{item.quantityType}}</td>
+                          <td>{{item.quantityStored}}</td>
+                          <td>{{item.quantity}}</td>
+                          <td>{{item.purchasedPrice}}</td>
+                          <td>{{item.expiryDate}}</td>
+                          <td>{{item.storedOn|date:"F, d, Y, G:i"}}</td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    {% include 'src/partials/footer.html' %}
+{% endblock content %}

@@ -9,7 +9,7 @@
             <div class="clearfix">
                 <!--Top Left-->
                 <div class="top-left">
-                    <div class="text">Welcome To {{data.preamble|slice:52}}</div>
+                    <div class="text">Email: {{data.email}}; Tel: {{data.phone_number}}</div>
                 </div>
                 <!--Top Right-->
                 <div class="top-right">
@@ -19,8 +19,8 @@
                         <li><a href="#"><span class="fa fa-twitter"></span></a></li>
                         <li><a href="#"><span class="fa fa-google-plus"></span></a></li>
                         <li><a href="#"><span class="fa fa-linkedin"></span></a></li>
-                        <li><a href="{% url 'login' %}">Staff-Portal</span></a></li>
-                        <li><a href="{% url 'login' %}">Student-Portal</span></a></li>
+                        <li><a href="">Staff-Portal</span></a></li>
+                        <li><a href="">Student-Portal</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -33,7 +33,7 @@
             <div class="clearfix">
                 
                 <div class="pull-left logo-box">
-                    <div class="logo"><a href="index-2.html"><img src="{{data.logo.url}}" alt="" title="" style="width: 300px;"></a></div>
+                    <div class="logo"><a href="index-2.html"><img src="{{data.logo.url}}" alt="" title="" style="width: 350px;"></a></div>
                 </div>
                 
                 <div class="pull-right upper-right clearfix">
@@ -42,7 +42,7 @@
                     <div class="upper-column info-box">
                         <div class="icon-box"><span class="flaticon-pin"></span></div>
                         <ul>
-                            <li>{{data.address|slice:"0:30"}} <br>{{data.address|slice:"31:60"}} <br>{{data.address|slice:"61:"}} </li>
+                            <li>{{data.address|slice:"39:62"}} <br>{{data.address|slice:"62:"}} </li>
                         </ul>
                     </div>
                     
@@ -94,23 +94,43 @@
                     <div class="navbar-collapse collapse clearfix" id="navbarSupportedContent">
                         <ul class="navigation clearfix">
                             <li class="current"><a href="{% url 'home' %}">Home</a></li>
-                            <li class=""><a href="{% url 'about'%}">About Us</a></li>
-                            <li class="dropdown"><a href="#">Our Courses</a>
+                            <li><a href="{% url 'about'%}">About Us</a></li>
+                            <li class="dropdown"><a href="#">Academics</a>
                                 <ul>
-                                    {% for course in courses %}
-                                    <li><a href="{% url 'course' course.id %}">{{course.title}}</a></li>
-                                    {% endfor %}
+                                    <li class="dropdown"><a href="#">Schools</a>
+                                        <ul>
+                                            {% for school in schools %}
+                                                <li><a href="{% url 'school' school.school_name %}">{{school.school_name}}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">E-Library</a></li>
+                                    <li><a href="#">Main Library</a></li>
+                                    <li class="dropdown"><a href="#">Departments</a>
+                                        <ul>
+                                            {% for department in departments %}
+                                                <li><a href="{% url 'department' department.department_name %}">{{department.department_name}}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown"><a href="#">Units</a>
+                                        <ul>
+                                            {% for unit in units %}
+                                                <li><a href="{% url 'unit' unit.unit_name %}">{{unit.unit_name}}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="dropdown"><a href="#">Addmission</a>
                                 <ul>
-                                    <li><a href="{% url 'form-home'%}">Apply</a></li>
+                                    <li><a href="">Apply</a></li>
                                     <li><a href="services-single.html">Check Addmission Status</a></li>
                                 </ul>
                             </li>
                             <li class=""><a href="{% url 'gallery' %}">Gallery</a></li>
                             <li class=""><a href="{% url 'news' %}">News and Updates</a></li>
-                            <li><a href="{%url 'contact'%}">Contact us</a></li>
+                            <li><a href="{%url 'website-contact'%}">Contact us</a></li>
                         </ul>
                     </div>
                 </nav>
@@ -203,16 +223,36 @@
                         <ul class="navigation clearfix">
                             <li class="current"><a href="{% url 'home' %}">Home</a></li>
                             <li class=""><a href="{% url 'about'%}">About Us</a></li>
-                            <li class="dropdown"><a href="#">Our Courses</a>
+                            <li class="dropdown"><a href="#">Academics</a>
                                 <ul>
-                                    {% for course in courses %}
-                                    <li><a href="{% url 'course' course.id %}">{{course.title}}</a></li>
-                                    {% endfor %}
+                                    <li class="dropdown"><a href="#">Schools</a>
+                                        <ul>
+                                            {% for school in schools %}
+                                                <li><a href="{% url 'school' school.school_name %}">{{school.school_name}}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">E-Library</a></li>
+                                    <li><a href="#">Main Library</a></li>
+                                    <li class="dropdown"><a href="#">Departments</a>
+                                        <ul>
+                                            {% for department in departments %}
+                                                <li><a href="{% url 'department' department.department_name %}">{{department.department_name}}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown"><a href="#">Units</a>
+                                        <ul>
+                                            {% for unit in units %}
+                                                <li><a href="{% url 'unit' unit.unit_name %}">{{unit.unit_name}}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="dropdown"><a href="#">Addmission</a>
                                 <ul>
-                                    <li><a href="{% url 'form-home'%}">Apply</a></li>
+                                    <li><a href="">Apply</a></li>
                                     <li><a href="services-single.html">check Addmission Status</a></li>
                                 </ul>
                             </li>
@@ -220,7 +260,7 @@
                             </li>
 
                             <li class=""><a href="{% url 'news' %}">News and Updates</a></li>
-                            <li><a href="{%url 'contact'%}">Contact us</a></li>
+                            <li><a href="{%url 'website-contact'%}">Contact us</a></li>
                         </ul>
                     </div>
                 </nav><!-- Main Menu End-->
@@ -246,11 +286,31 @@
                     </li>
                     <li class="dropdown"><a href="{% url 'about'%}">About Us</a>
                     </li>
-                    <li class="dropdown"><a href="#">Courses</a>
+                    <li class="dropdown"><a href="#">Academics</a>
                         <ul>
-                            {% for course in courses %}
-                            <li><a href="{% url 'course' course.id%}">{{course.title}}</a></li>
-                            {% endfor %}
+                            <li class="dropdown"><a href="#">Schools</a>
+                                <ul>
+                                    {% for school in schools %}
+                                        <li><a href="{% url 'school' school.school_name %}">{{school.school_name}}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            <li><a href="#">E-Library</a></li>
+                            <li><a href="#">Main Library</a></li>
+                            <li class="dropdown"><a href="#">Departments</a>
+                                <ul>
+                                    {% for department in departments %}
+                                        <li><a href="{% url 'department' department.department_name %}">{{department.department_name}}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            <li class="dropdown"><a href="#">Units</a>
+                                <ul>
+                                    {% for unit in units %}
+                                        <li><a href="{% url 'unit' unit.unit_name %}">{{unit.unit_name}}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
                         </ul>
                     </li>
                     <li class=""><a href="{% url 'gallery' %}">Gallery</a>
@@ -258,7 +318,7 @@
 
                     <li class=""><a href="{% url 'news'%}">News & Updates</a>
                     </li>
-                    <li><a href="{%url 'contact'%}">Contact us</a></li>
+                    <li><a href="{%url 'website-contact'%}">Contact us</a></li>
                 </ul>
             </nav>
         </div>

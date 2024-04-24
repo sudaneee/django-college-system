@@ -27,48 +27,76 @@
     </div>
     <!--End Page Title-->
 
-
-
-
-
- 	<!--Cases Section-->
-     <section class="case-page-section">
+	<!--Sidebar Page Container-->
+    <div class="sidebar-page-container">
     	<div class="auto-container">
-        	<div class="sec-title centered">
-				<h2>Our Latast Gallery</h2>
-				<div class="text">Take a look at our previous work and don`t hesitate to start work with us. We create custom <br> solutions today, that transcend the trends of tomorrow.</div>
-			</div>
-            
-            <div class="row">
-                {% for gallery_item in gallery_object %}
-                <!--Case block-->
-                <div class="case-block col-lg-4 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <div class="image">
-                            <img src="{{gallery_item.image.url}}" alt="" />
-                            <div class="overlay-box">
-                                <div class="overlay-inner">
-                                    <div class="content">
-                                        <h3><a href="gallery-single.html">{{gallery_item.title}}</a></h3>
-                                       
-                                        <a href="{% url 'single-gallery' gallery_item.id%}" class="read-more">View <span class="fa fa-eye"></span></a>
+        	<div class="row clearfix">
+            	
+                <!--Content Side-->
+                <div class="content-side col-lg-12 col-md-12 col-sm-12">
+                	<!--Shop Single-->
+                	<div class="shop-section">
+                        
+                        <div class="our-shops">
+                        	
+                            <div class="row clearfix">
+                            	
+                                <!--Shop Item-->
+                                {% for image in images%}
+                                <div class="shop-item col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="inner-box">
+                                        <div class="image">
+                                            <img src="{{image.image.url}}" style="width: 350px; height: 350px;" alt="" />
+                                            <div class="overlay-box">
+                                                <ul class="cart-option">
+                                                    <li><a href="{{image.image.url}}" data-fancybox="images" data-caption="" class="link"><span class="icon fa fa-search"></span></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="lower-content clearfix">
+                                            <div class="pull-center">
+                                                <p><a href="">{{image.title}}</a></p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+                                
+                                {% endfor %}
+
                             </div>
+                            
                         </div>
+                        
+                        <!--Styled Pagination-->
+                        <ul class="styled-pagination text-center">
+                            <!-- Previous page link -->
+                            {% if images.has_previous %}
+                                <li class="prev"><a href="?page=1"><span class="fa fa-angle-left"></span></a></li>
+                                <li><a href="?page={{ images.previous_page_number }}">{{ images.previous_page_number }}</a></li>
+                            {% endif %}
+
+                            <!-- Current page -->
+                            <li><a href="#" class="active">{{ images.number }}</a></li>
+
+                            <!-- Next page link -->
+                            {% if images.has_next %}
+                                <li><a href="?page={{ images.next_page_number }}">{{ images.next_page_number }}</a></li>
+                                <li class="next"><a href="?page={{ images.paginator.num_pages }}"><span class="fa fa-angle-right"></span></a></li>
+                            {% endif %}
+                        </ul>
+                        <!--End Styled Pagination-->
+
+                        
                     </div>
                 </div>
-                {% endfor %}
-            </div>
-
-            
+                
 
 
-
-       	
+			</div>
+       
         </div>
-    </section>
-    <!--End Cases Section-->
+    </div>
+    <!--End Shop Section-->
 
 
     <!--Map Info Section-->

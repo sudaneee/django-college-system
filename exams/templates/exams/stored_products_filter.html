@@ -1,0 +1,94 @@
+{% extends 'src/partials/base.html' %}
+{% load static %}
+
+
+{% block content %}
+    {% include 'src/partials/navbar.html' %}
+    {% include 'src/partials/sidebar.html' %}
+    <div class="main-content" id='app'>
+      <section class="section">
+        <div class="section-body">
+          <div class='row'>
+
+            {% comment %} ==========Stored Products============= {% endcomment %}
+            <div class="col-12 col-md-12 col-lg-12">
+              <div class='card'>
+                <div class="card-header">
+                  <h4>Stored Products by Date Range</h4>
+                </div>
+                <div class='card-body'>
+                  <form method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                      <div class="col-6">
+                        <div class="form-group">
+                          <label>From</label>
+                          <input type="text" name="starting" class="form-control" placeholder="2020-01-27">
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="form-group">
+                          <label>To</label>
+                          <input type="text" name="ending" class="form-control" placeholder="2020-01-27">
+                        </div>
+                      </div>
+                    </div>
+
+                    <button name="orders_filter" class="btn btn-primary mr-1" type="submit">Submit</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-12 col-lg-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Store History</h4>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-striped table-hover" id="save-stage" style="width:100%;">
+                      <thead>
+                        <tr>
+                          <th>S/N</th>
+                          <th>Product</th>
+                          <th>QuantityType</th>
+                          <th>Quantity Stored</th>
+                          <th>Available Quantity</th>
+                          <th>Purchased Price</th>
+                          <th>Selling Price</th>
+                          <th>ُExpiry Date</th>
+                          <th>Stored On</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for item in items %}
+                        <tr>
+                          <td>{{forloop.counter}}</td>
+                          <td>{{item.product}}</td>
+                          <td>{{item.quantityType}}</td>
+                          <td>{{item.quantityStored}}</td>
+                          <td>{{item.quantity}}</td>
+                          <td>{{item.purchasedPrice}}</td>
+                          <td>{{item.price}}</td>
+                          <td>{{item.expiryDate}}</td>
+                          <td>{{item.storedOn|date:"F, d, Y, G:i"}}</td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+      </section>
+    </div>
+
+    {% include 'src/partials/footer.html' %}
+
+
+{% endblock content %}

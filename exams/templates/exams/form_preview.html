@@ -1,0 +1,203 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Header Template</title>
+    <!-- Add Bootstrap CSS link -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <!-- Centered Image -->
+            <img src="{% static 'form_app/images/oo.png' %}" width="1000" class="img-fluid mx-auto d-block my-1" alt="Centered Image">
+            <h4 class="text-center">::Application Form Preview::</h4>
+        </div>
+    </div>
+
+    <!-- Content Section -->
+    <div class="container mt-5">
+
+        
+
+        <!-- Simple Table -->
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th colspan="8" class="text-center">Bio-Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Full Name:  </th>
+                    <td>{{biodata.surname}} {{biodata.firstname}} {{biodata.othername}}</td>
+                    <th>Email Address:  </th>
+                    <td>{{user.email}}</td>
+
+
+                </tr>
+                <tr>
+                    <th>Phone No: </th>
+                    <td>{{contact.tel1}}; {{contact.tel2}}</td>
+                    <th>Local Gov't: </th>
+                    <td>{{biodata.lga_of_origin}}</td>
+
+
+                </tr>
+                <tr>
+                    <th>City: </th>
+                    <td>{{biodata.home_town}}</td>
+                    <th>Address: </th>
+                    <td>{{contact.contact_address}}</td>
+
+                </tr>
+                <tr>
+                    <th>Date of Birth: </th>
+                    <td>{{biodata.date_of_birth}}</td>
+                    <th>Next of Kin: </th>
+                    <td>{{next_of_kin.nok_fullname}}</td>
+   
+                </tr>
+                <tr>
+                    <th>Next of Kin Phone No: </th>
+                    <td>{{next_of_kin.nok_tel}}</td>
+                    <th>Course Applied: </th>
+                    <td>{{course_applied.programme}}</td>
+
+                </tr>
+                <tr>
+                    <th>Payment Reference: </th>
+                    <td>R23FGR2</td>
+                    <th>Admission Status: </th>
+                    <td>{{admision_status}}</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="row">
+            
+            <div class="col-6">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th colspan="2" class="text-center">O-Level - First Sitting</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Exam Type: </th>
+                            <td>{{olevel.exam_type|slice:"0:1"|join:", "}}</td>
+                        </tr>
+                        <tr>
+                            <th>Exam Year: </th>
+                            <td>{{olevel.exam_year|slice:"0:1"|join:", "}}</td>
+                        </tr>
+                        <tr>
+                            <th>Center No: </th>
+                            <td>{{olevel.centre_no|slice:"0:1"|join:", "}}</td>
+                        </tr>
+                        <tr>
+                            <th>Center Name: </th>
+                            <td>{{olevel.centre_name|slice:"0:1"|join:", "}}</td>
+                        </tr>
+                        <tr>
+                            <th>Exam No: </th>
+                            <td>{{olevel.exam_number|slice:"0:1"|join:", "}}</td>
+                        </tr>
+                        <tr>
+                            <th>Subjects</th>
+                            <th>Grades</th>
+                        </tr>
+                        {% for i, j in olevel.subjects_grades1 %} 
+                        <tr>
+                            <td>{{i}}</td>
+                            <td>{{j}}</td>
+                        </tr>
+                        {% endfor %} 
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-6">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th colspan="2" class="text-center">O-Level - Second Sitting</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Exam Type: </th>
+                            <td>{{olevel.exam_type|slice:"1:2"|join:", "}}</td>
+                        </tr>
+                        <tr>
+                            <th>Exam Year: </th>
+                            <td>{{olevel.exam_year|slice:"1:2"|join:", "}}</td>
+                        </tr>
+                        <tr>
+                            <th>Center No: </th>
+                            <td>{{olevel.centre_no|slice:"1:2"|join:", "}}</td>
+                        </tr>
+                        <tr>
+                            <th>Center Name: </th>
+                            <td>{{olevel.centre_name|slice:"1:2"|join:", "}}</td>
+                        </tr>
+                        <tr>
+                            <th>Exam No: </th>
+                            <td>{{olevel.exam_number|slice:"1:2"|join:", "}}</td>
+                        </tr>
+                        <tr>
+                            <th>Subjects</th>
+                            <th>Grades</th>
+                        </tr>
+                        {% for k, l in olevel.subjects_grades2 %} 
+                        <tr>
+                            <td>{{k}}</td>
+                            <td>{{l}}</td>
+                        </tr>
+                        {% endfor %} 
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-bordered"> 
+                    <thead>
+                        <tr>
+                            <th colspan="8" class="text-center">A-Level</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>S/N</th>
+                            <th>School</th>
+                            <th>Year of Graduation</th>
+                            <th>Grade</th>
+                        </tr>
+                        {% for i, j, k in alevel %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{i}}</td>
+                            <td>{{j}}</td>
+                            <td>{{k}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Add Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,357 @@
+{% extends 'src/partials/base.html' %}
+{% load static %}
+
+
+{% block content %}
+    {% include 'src/partials/navbar.html' %}
+    {% include 'src/partials/sidebar.html' %}
+    <div class="main-content" id="app2">
+      <section class="section">
+        <div class="section-body">
+          <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Create Order</h4>
+                </div>
+                <div class="card-body">
+                  <div class="form-group">
+                    <label>Scan with Barcode</label>
+                    <input v-model="scannedBarcode" type="text" class="form-control" @keydown="checkBarcode" placeholder="scan barcode">
+                  </div>
+
+                  <div class="form-group">
+                    <input v-model="searchKeyword" type="text" class="form-control" placeholder="Search">
+                    <label>Products</label>
+                    <select v-model="selected" size="5"  class="form-control" data-height="100%">
+                      <option v-for="product in filteredNames" :value="product" :key="product">
+                        [[product.name]]=======N[[product.price]]=======[[product.quantityType.name]]=======[[product.quantityInStockAvailable]]===========[[product.barcode]]
+                      </option>
+
+                    </select>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-12 col-lg-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Order Details</h4>
+
+                </div>
+                <div class="card-body p-0">
+                  <div class="table-responsive">
+                    <table class="table table-striped">
+                      <tr>
+                        <th>#</th>
+                        <th>Item Description</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Amount</th>
+                        <th>Action</th>
+                      </tr>
+                      <tr v-for="(i, j) in selectedProducts" :key="i.id">
+                        <td>[[j+1]]</td>
+                        <td>[[i.name]]</td>
+                        <td><input @change="setQuantity([[j]])" v-model="selectedProducts[j].quantityOrdered" type="number" class="form-control"></td>
+                        <td>[[formatterN.format(i.price)]]</td>
+                        <td>[[formatterN.format(i.amount)]]</td>
+                        <td><Button @click="deleteItem([[j]])" class="btn btn-danger" type="button">Delete</Button></td>
+                      </tr>
+
+                      <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Sub-Total</td>
+                        <td>[[formatterN.format(totalAmount.length == 0 ? 0 : totalAmount.reduce((a,b) => {return a + b}))]]</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Discount</td>
+                        <td><input type="text" v-model="discount" class="form-control"/></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Total</td>
+                        <td>[[formatterN.format(discounted)]]</td>
+                        <td></td>
+                      </tr>
+
+                    </table>
+                    <div class="text-center mb-2 mt-2" >
+                      <button @click="createOrder" id="submit"  type="button" class="btn btn-primary">Submit</button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="row">
+            <div class="col-12 col-md-6 col-lg-6">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Large Modal</h4>
+                </div>
+                <div class="card-body">
+                  <button type="button" class="btn btn-primary" data-toggle="modal"
+                    data-target=".bd-example-modal-lg">Large
+                    Modal</button>
+                </div>
+              </div>
+            </div>
+          </div> -->
+          <p id="cToken" style="visibility: hidden;">{{ csrf_token }}</p>
+
+  
+
+        </div>
+      </section>
+        <!-- Large modal -->
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="myLargeModalLabel">Order Created !</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Here is the order Reference</p>
+                <h1>Order Reference: [[order_ref]]</h1>
+                <a :href="rUrl">Print Reciept</a>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    {% include 'src/partials/footer.html' %}
+
+    {% comment %} <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> {% endcomment %}
+    <script src="{% static 'src/assets/js/vue.global.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js" integrity="sha512-QTnb9BQkG4fBYIt9JGvYmxPpd6TBeKp6lsUrtiVQsrJ9sb33Bn9s0wMQO9qVBFbPX3xHRAsBHvXlcsrnJjExjg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/short-unique-id@latest/dist/short-unique-id.min.js"></script>
+    <script>
+
+      let vm = Vue.createApp({
+        delimiters: ["[[", "]]"],
+        data(){
+            return {
+                products: [],
+                scannedBarcode: '',
+                searchKeyword: '',
+                discount: '',
+                
+                typeOfPatient: '',
+                selected: '',
+                selectedProducts: [],
+                orderId: 0,
+                order_ref: '',
+                formatterN: Intl.NumberFormat('en-US', {
+                  style: 'currency',
+                  currency: 'NGN',
+
+                }),
+                allAmount: [],
+                // totalAmount: '',
+                rUrl: '',
+
+
+
+
+
+            }
+        },
+        methods: {
+
+          setQuantity(id, event){
+
+
+            this.selectedProducts[id].amount = this.selectedProducts[id].quantityOrdered * this.selectedProducts[id].price
+            this.discount*2
+            this.allAmount.push(this.selectedProducts[id].amount)
+
+
+          },
+
+          deleteItem(id, event){
+            this.selectedProducts.splice(id, 1)
+            this.allAmount.splice(id, 1)
+
+          },
+          checkBarcode(event) {
+            if (event.key === 'Enter') {
+              // When Enter key is pressed (barcode scanned)
+              const scannedBarcode = this.scannedBarcode.trim(); // Remove leading/trailing spaces
+        
+              // Search for an exact match in the product list
+              const product = this.products.find(product => product.barcode === scannedBarcode);
+        
+              if (product) {
+                // If a matching product is found, add it to the selectedProducts list
+                product.quantityOrdered = 1; // Set an initial quantity
+                product.amount = product.price * product.quantityOrdered;
+                this.selectedProducts.push(product);
+        
+                // Clear the scanned barcode input field
+                this.scannedBarcode = '';
+              } else {
+                // Handle the case where no matching product is found
+                alert('Product not found');
+              }
+            }
+          },
+         async createOrder(event){
+          try {
+            const uuid = new ShortUniqueId();
+            const orderRef = uuid.rnd();
+            this.order_ref = orderRef;
+    
+            const cToken = document.getElementById('cToken').innerHTML;
+    
+            const response = await axios.post(
+              `${window.location.origin}/api-order-create/`,
+              {
+                orderReference: orderRef,
+                discount: this.discountAmount,
+              },
+              {
+                auth: {
+                  username: 'sudaniy',
+                  password: 'ismailk2@',
+                },
+                headers: { "X-CSRFToken": cToken },
+              }
+            );
+    
+            this.orderId = response.data.id;
+    
+            await Promise.all(
+              this.selectedProducts.map(async (element) => {
+                await axios.post(
+                  `${window.location.origin}/api-order-item-create/`,
+                  {
+                    product: element.id,
+                    quantity: element.quantityOrdered,
+                    order: this.orderId,
+                  },
+                  {
+                    auth: {
+                      username: 'sudaniy',
+                      password: 'ismailk2@',
+                    },
+                    headers: { "X-CSRFToken": cToken },
+                  }
+                );
+    
+                await axios.put(
+                  `${window.location.origin}/api-product-update/${element.id}/`,
+                  {
+                    quantityInStockAvailable: element.quantityInStockAvailable - element.quantityOrdered,
+                  },
+                  {
+                    auth: {
+                      username: 'sudaniy',
+                      password: 'ismailk2@',
+                    },
+                    headers: { "X-CSRFToken": cToken },
+                  }
+                );
+              })
+            );
+    
+            this.rUrl = `{% url 'reciept' orderRef=0 %}`.replace('0', orderRef);
+            document.getElementById("submit").disabled = true;
+            window.location.href = `${window.location.origin}/reciept/${orderRef}`;
+          } catch (error) {
+            // Handle errors
+            console.error("Error:", error);
+          }
+         }
+
+
+
+        },
+        computed: {
+          filteredNames() {
+            return this.products.filter((n) =>
+              n.name.toLowerCase().includes(this.searchKeyword.toLowerCase())
+            )
+          },
+          totalAmount(){
+            sum = this.selectedProducts.map(n => {
+              return n.amount == null ? 0 : n.amount
+            })
+            return sum
+
+          },
+          discounted(){
+            sum = this.selectedProducts.map(n => {
+              return n.amount == null ? 0 : n.amount
+            })
+            total = (sum.length == 0 ? 0 : sum.reduce((a,b) => {return a + b}))
+
+            this.discount.includes('%') ? sub_total = total - (total * (this.discount.slice(0, -1)) /100) : sub_total = total - this.discount
+            return sub_total
+          },
+          discountAmount(){
+            sum = this.selectedProducts.map(n => {
+              return n.amount == null ? 0 : n.amount
+            })
+            total = (sum.length == 0 ? 0 : sum.reduce((a,b) => {return a + b}))
+
+            this.discount.includes('%') ? discount_amount = total * (this.discount.slice(0, -1)) /100 : discount_amount = this.discount
+            return discount_amount
+          },
+
+
+
+
+        },
+        watch: {
+          selected(product) {
+            product.quantityOrdered = 1
+            product.amount = product.price * product.quantityOrdered
+            this.selectedProducts.push(product)
+
+
+
+
+
+          },
+
+
+        },
+        mounted() {
+          axios
+            .get(`${window.location.origin}/api-product-view/`, {}, {
+              auth: {
+                username: 'sudaniy',
+                password: 'ismailk2@'
+              }
+            })
+            .then(response => (this.products = response.data ))
+
+
+        }
+
+    }).mount('#app2')
+
+
+
+    </script>
+
+{% endblock content %}

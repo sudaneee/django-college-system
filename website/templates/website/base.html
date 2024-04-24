@@ -5,7 +5,7 @@
 <!-- index31:09-->
 <head>
 <meta charset="utf-8">
-<title>Nihaz</title>
+<title>{% if page_title %} {{page_title}} --- FCE Jama'are  {% else %} FCE Jama'are {% endif %}</title>
 <!-- Stylesheets -->
 <link href="{% static 'website/css/bootstrap.css' %}" rel="stylesheet">
 <link href="{% static 'website/css/style.css' %}" rel="stylesheet">
@@ -16,8 +16,8 @@
 <!--Color Themes-->
 <link id="theme-color-file" href="{% static 'website/css/color-themes/default-theme.css' %}" rel="stylesheet">
 
-<link rel="shortcut icon" href="{{data.logo.url}}" type="image/x-icon">
-<link rel="icon" href="{{data.logo.url}}" type="image/x-icon">
+<link rel="shortcut icon" href="{{data.footer_logo.url}}" type="image/x-icon">
+<link rel="icon" href="{{data.footer_logo.url}}" type="image/x-icon">
 
 <!-- Responsive -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
